@@ -7,6 +7,51 @@ body {
     height: 100vh;
 }
 
+/* Header and Nav Bar */
+
+header {
+    height: 60px;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#left-nav {
+    display: flex;
+    flex-direction: row;
+    border-right: dotted black 0.5px;
+}
+
+#logo-icon {
+    height: 40px;
+    margin: 10px 15px;
+}
+
+#left-nav p {
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    align-self: center;
+    margin-right: 10px;
+}
+
+#right-nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 15px;
+    padding-left: 15px;
+    border-left: dotted black 0.5px;
+}
+
+#right-nav p {
+
+}
+
+
+/* Book DIV and everything inside */
+
 #books-div {
     display: flex;
     flex-direction: row;
@@ -17,19 +62,45 @@ body {
 .book {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-content: center; */
     
     width: 300px;
     height: 300px;
     margin: 20px;
     background-color: aquamarine;
-    border-radius: 0% 10% 10% 10%;
-    
-   
+    border-radius: 0% 10% 10% 10%;      
 }
 
-button {
+.book p {
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    align-self: center;
+    margin-top: 10px;
+}
+
+.book-title {
+    font-size: 30px;
+    text-align: center;
+    
+}
+
+.book-author {
+    font-size: 20px;
+    text-align: center;
+}
+
+.book-img {
+    align-self: center;
+    height: 150px;
+    margin-top: 10px;
+}
+
+
+
+
+/* ------------------------------ */
+
+#add-book-btn {
     width: 75px;
     height: 75px;
     margin: 40px;
@@ -39,23 +110,4 @@ button {
     right: 0;
     background-color: royalblue;
     font-size: 35px;
-}
-
-p {
-    margin: 0;
-    padding: 0;
-    width: fit-content;
-    align-self: center;
-    
-}
-
-.book-title {
-    width: fit-content;
-    font-size: 30px;
-    text-align: center;
-}
-
-.book-img {
-    align-self: center;
-    width: 125px;
 }
