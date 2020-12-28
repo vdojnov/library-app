@@ -174,7 +174,7 @@ div .read-text {
     outline: 0;
 }
 
-#new-book-form {
+.new-book-form {
     position: fixed;
     background-color: blue;
     width: 320px;

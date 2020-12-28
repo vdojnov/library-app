@@ -51,12 +51,19 @@
     </div>
 
     <button id="add-book-btn">+</button>
-    <div id="new-book-form">
-        <p>Add a new book</p>
-        <form action="">            
-            <input type="text">
-            <input type="text">
-            <input id="submit-book-btn" type="submit">
+    <div id="add-book-div" class="new-book-form">
+        <form id="new-book-form">            
+            <p>Add a new book</p>
+            <label for="book-title">Title:</label>
+            <input id="book-title" type="text" required>
+            <label for="book-author" >Author:</label>
+            <input id="book-author" type="text" required>
+            <label for="book-category" >Category:</label>
+            <input id="book-category" type="text" required>
+            <input type="radio" name="read" value="read" id="read" required>Read
+            <input type="radio" name="read" value="notRead" id="not-read" required>Not Read
+            <input id="submit-new-book" type="submit" value="Submit">
+            <!-- <button  id="submit-new-book">Submit</button> -->
         </form>
     </div>
 
