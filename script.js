@@ -97,12 +97,20 @@ function buildBookDiv(bookObj) {
 }
 
 
-let bookOne = new Book("The Lean Startup", "Eric Ries", false, "Business")
-bookOne.thumbnail = httpGet(bookOne.title)
 
+
+
+let bookOne = new Book("The Lean Startup", "Eric Ries", false, "Business")
 addBookToLibrary(bookOne)
 
-buildBookDiv(bookOne)
+let bookThree = new Book("The Subtle Art of not giving a fuck", "Robert Kiyasaki", false, "Business")
+addBookToLibrary(bookThree)
+
+let bookTwo = new Book("Rich Dad Poor Dad", "Robert Kiyasaki", false, "Business")
+addBookToLibrary(bookTwo)
+
+myLibrary.forEach(bookObj => buildBookDiv(bookObj));
+// buildBookDiv(bookOne)
 
 
 
