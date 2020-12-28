@@ -98,6 +98,15 @@ function buildBookDiv(bookObj) {
     bookDiv.appendChild(book)
 }
 
+function handleAddBtn() {    
+    form.classList.toggle('inactive')
+}
+
+
+let addBookBtn = document.querySelector("#add-book-btn")
+
+addBookBtn.addEventListener('click', handleAddBtn)
+
 
 
 

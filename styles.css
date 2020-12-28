@@ -180,5 +180,13 @@ div .read-text {
     width: 320px;
     height:350px;
     right:30px;
-    bottom: 115px;   
+    bottom: 115px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;   
+}
+
+
+.inactive {
+    display: none;
 }
