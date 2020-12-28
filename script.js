@@ -49,6 +49,8 @@ function addBookToLibrary(bookObj) {
 }
 
 function buildBookDiv(bookObj) {
+    bookObj.thumbnail = httpGet(bookObj.title)
+
     // create book div
     const book = document.createElement('div')
     book.className = "book" 
@@ -68,7 +70,7 @@ function buildBookDiv(bookObj) {
     // Create book cover img tag
     const imgBookCover = document.createElement('img')
     imgBookCover.className = "book-img"
-    imgBookCover.src = httpGet(bookObj.title)
+    imgBookCover.src = bookObj.thumbnail
     book.appendChild(imgBookCover)
 
     // Create div for toggle read 
@@ -102,6 +104,7 @@ function buildBookDiv(bookObj) {
 
 let bookOne = new Book("The Lean Startup", "Eric Ries", false, "Business")
 addBookToLibrary(bookOne)
+// console.log(bookOne)
 
 let bookThree = new Book("The Subtle Art of not giving a fuck", "Robert Kiyasaki", false, "Business")
 addBookToLibrary(bookThree)
@@ -109,8 +112,14 @@ addBookToLibrary(bookThree)
 let bookTwo = new Book("Rich Dad Poor Dad", "Robert Kiyasaki", false, "Business")
 addBookToLibrary(bookTwo)
 
-myLibrary.forEach(bookObj => buildBookDiv(bookObj));
+// myLibrary.forEach(bookObj => buildBookDiv(bookObj));
 // buildBookDiv(bookOne)
+
+let outputArr = myLibrary;
+
+
+outputArr.forEach(bookObj => buildBookDiv(bookObj));
+
 
 
 
