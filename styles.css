@@ -174,16 +174,52 @@ div .read-text {
     outline: 0;
 }
 
-.new-book-form {
+.add-book-div {
     position: fixed;
-    background-color: blue;
+    background-color: beige;
     width: 320px;
     height:350px;
     right:30px;
     bottom: 115px;
     display: flex;
     flex-direction: column;
-    align-content: center;   
+    /* align-content: center;    */
+    box-shadow: 1px 1px 2px 2px lightgrey;
+}
+
+#add-book-div p {
+    width: fit-content;
+    align-self: center;
+    font-size: 35px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+#new-book-form {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#new-book-form input {
+    margin-bottom: 10px;
+    height: 25px;
+}
+
+label, input {
+    font-size: 15px;
+}
+
+
+input[type=radio] {
+    border: 0px;
+    width: 20%;
+    height: 3em;
+    margin-top: 10px;
+    vertical-align: middle;
+    text-justify: center;
 }
 
 

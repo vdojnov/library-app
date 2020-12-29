@@ -40,11 +40,13 @@ function getBookCoverURL(title, cb) {
         let objJson = JSON.parse(xmlHttp.responseText);
         if (objJson.items) {
             let thumbnail=objJson.items[0].volumeInfo.imageLinks.thumbnail
+            if (thumbnail){
+                cb(thumbnail);
+            } else {
+                let thumbnail = "https://lh3.googleusercontent.com/proxy/GURi9BpmMCFCNPQlxa_pbuwhb286-KxvtstO9fyczA-_QyM3vZD3gvq5mfQu2L0-L7hND8JpCyheAQu0qkUsckuxCJ_H1mZ4pZtPZWknyl9Qioi6lnfOHV6tXGvmp52IQV-iKSmluJQtoIk17PylRcAgeJ2Bemx1HJZRYOQbuPVGxgHjk0E";
             cb(thumbnail);
-        } else {
-            let thumbnail = "https://lh3.googleusercontent.com/proxy/GURi9BpmMCFCNPQlxa_pbuwhb286-KxvtstO9fyczA-_QyM3vZD3gvq5mfQu2L0-L7hND8JpCyheAQu0qkUsckuxCJ_H1mZ4pZtPZWknyl9Qioi6lnfOHV6tXGvmp52IQV-iKSmluJQtoIk17PylRcAgeJ2Bemx1HJZRYOQbuPVGxgHjk0E";
-            cb(thumbnail);
-        }
+            }
+        } 
     }
     xmlHttp.open( "GET", theUrl);
     xmlHttp.send();
@@ -111,18 +113,27 @@ function handleAddBtn() {
     form.classList.toggle('inactive')
 }
 
-function handleSubmitBtn(e) {
-    e.preventDefault();
-    let inputBookForm = document.querySelector("form")
+function handleSubmitBtn() {
+    // e.preventDefault();
+    let inputBookForm = document.querySelector("form");
     let title = document.querySelector("#book-title").value;
     let author = document.querySelector("#book-author").value;
-    let readText = document.querySelector('input[name="read"]:checked').value;
-    let readBoolean = readText==="read"
-    let category = document.querySelector("#book-category").value
+    let radioButton = document.querySelector('input[name="read"]:checked');
+    if (!radioButton) {return false}
+    let readText = radioButton.value;
+    let readBoolean = readText==="read";
+    let category = document.querySelector("#book-category").value;
+
+    let blank = "";
+    if (title===blank | author===blank | category === blank | !radioButton) {
+        return false
+    }
+
     let newBook = new Book(title, author, readBoolean, category)
     addBookToLibrary(newBook)
     buildBookDiv(newBook)
     inputBookForm.reset();
+    handleAddBtn()
 }
 
 
@@ -155,7 +166,7 @@ outputArr.forEach(bookObj => buildBookDiv(bookObj));
 
 addBookBtn.addEventListener('click', handleAddBtn)
 
-submitNewBookBtn.addEventListener('click', handleSubmitBtn)
+// submitNewBookBtn.addEventListener('click', handleSubmitBtn)
 
 
 // Notes:
