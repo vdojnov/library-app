@@ -33,20 +33,21 @@ const getThumbnail = function(title) {
     // }
 }
 
-function httpGet(title) {
+function getBookCoverURL(title, cb) {
     let xmlHttp = new XMLHttpRequest();
     let theUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + title;
-    xmlHttp.open( "GET", theUrl, false); // false for synchronous request
-    xmlHttp.send();
-    let objJson = JSON.parse(xmlHttp.responseText);
-    if (objJson.items) {
-        let thumbnail=objJson.items[0].volumeInfo.imageLinks.thumbnail
-        return thumbnail;
-    } else {
-        let thumbnail = "https://lh3.googleusercontent.com/proxy/GURi9BpmMCFCNPQlxa_pbuwhb286-KxvtstO9fyczA-_QyM3vZD3gvq5mfQu2L0-L7hND8JpCyheAQu0qkUsckuxCJ_H1mZ4pZtPZWknyl9Qioi6lnfOHV6tXGvmp52IQV-iKSmluJQtoIk17PylRcAgeJ2Bemx1HJZRYOQbuPVGxgHjk0E";
-        return thumbnail;
+    xmlHttp.onload = function (e) {
+        let objJson = JSON.parse(xmlHttp.responseText);
+        if (objJson.items) {
+            let thumbnail=objJson.items[0].volumeInfo.imageLinks.thumbnail
+            cb(thumbnail);
+        } else {
+            let thumbnail = "https://lh3.googleusercontent.com/proxy/GURi9BpmMCFCNPQlxa_pbuwhb286-KxvtstO9fyczA-_QyM3vZD3gvq5mfQu2L0-L7hND8JpCyheAQu0qkUsckuxCJ_H1mZ4pZtPZWknyl9Qioi6lnfOHV6tXGvmp52IQV-iKSmluJQtoIk17PylRcAgeJ2Bemx1HJZRYOQbuPVGxgHjk0E";
+            cb(thumbnail);
+        }
     }
-    // return thumbnail;
+    xmlHttp.open( "GET", theUrl);
+    xmlHttp.send();
 }
 
 
@@ -55,53 +56,54 @@ function addBookToLibrary(bookObj) {
 }
 
 function buildBookDiv(bookObj) {
-    bookObj.thumbnail = httpGet(bookObj.title)
-
-    // create book div
-    const book = document.createElement('div')
-    book.className = "book" 
-
-    // Create Book title p tag
-    const pBookTitle = document.createElement('p')
-    pBookTitle.className = "book-title"
-    pBookTitle.textContent = bookObj.title
-    book.appendChild(pBookTitle)
-
-    // Create Book author p tag
-    const pBookAuthor = document.createElement('p')
-    pBookAuthor.className = "book-author"
-    pBookAuthor.textContent = bookObj.author
-    book.appendChild(pBookAuthor)
-
-    // Create book cover img tag
-    const imgBookCover = document.createElement('img')
-    imgBookCover.className = "book-img"
-    imgBookCover.src = bookObj.thumbnail
-    book.appendChild(imgBookCover)
-
-    // Create div for toggle read 
-    const bookReadDiv = document.createElement('div')
-    bookReadDiv.className = "book-read-div"
+    getBookCoverURL(bookObj.title, (thumbnail) => {
+        bookObj.thumbnail = thumbnail;
+        // create book div
+        const book = document.createElement('div')
+        book.className = "book" 
     
-        const pReadText = document.createElement('p')
-        pReadText.className = "read-text"
-        pReadText.textContent = bookObj.read? "Read":"Not Read";
-        bookReadDiv.appendChild(pReadText)
-
-        const readBtn = document.createElement('button')
-        readBtn.className = "read-btn"
-        readBtn.textContent = bookObj.read? "Mark as Unread":"Mark as Read";
-        bookReadDiv.appendChild(readBtn)
-
-    book.appendChild(bookReadDiv)
-
-    // Create delete button for book
-    const deleteBtn = document.createElement('button')
-    deleteBtn.className = "delete-book-btn"
-    deleteBtn.textContent = "Delete"
-    book.appendChild(deleteBtn)
-
-    bookDiv.appendChild(book)
+        // Create Book title p tag
+        const pBookTitle = document.createElement('p')
+        pBookTitle.className = "book-title"
+        pBookTitle.textContent = bookObj.title
+        book.appendChild(pBookTitle)
+    
+        // Create Book author p tag
+        const pBookAuthor = document.createElement('p')
+        pBookAuthor.className = "book-author"
+        pBookAuthor.textContent = bookObj.author
+        book.appendChild(pBookAuthor)
+    
+        // Create book cover img tag
+        const imgBookCover = document.createElement('img')
+        imgBookCover.className = "book-img"
+        imgBookCover.src = bookObj.thumbnail
+        book.appendChild(imgBookCover)
+    
+        // Create div for toggle read 
+        const bookReadDiv = document.createElement('div')
+        bookReadDiv.className = "book-read-div"
+        
+            const pReadText = document.createElement('p')
+            pReadText.className = "read-text"
+            pReadText.textContent = bookObj.read? "Read":"Not Read";
+            bookReadDiv.appendChild(pReadText)
+    
+            const readBtn = document.createElement('button')
+            readBtn.className = "read-btn"
+            readBtn.textContent = bookObj.read? "Mark as Unread":"Mark as Read";
+            bookReadDiv.appendChild(readBtn)
+    
+        book.appendChild(bookReadDiv)
+    
+        // Create delete button for book
+        const deleteBtn = document.createElement('button')
+        deleteBtn.className = "delete-book-btn"
+        deleteBtn.textContent = "Delete"
+        book.appendChild(deleteBtn)
+    
+        bookDiv.appendChild(book)
+    })
 }
 
 function handleAddBtn() {   
