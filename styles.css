@@ -64,7 +64,8 @@ header {
     height:fit-content;
     margin: 20px;
     background-color: aquamarine;
-    border-radius: 0% 10% 10% 10%;      
+    border-radius: 0% 10% 10% 10%; 
+    box-shadow: 1px 1px 3px blue;     
 }
 
 .book p {
@@ -90,6 +91,7 @@ header {
     align-self: center;
     height: 175px;
     margin-top: 10px;
+    max-width: 125px;
 }
 
 .book-read-div {
@@ -185,7 +187,7 @@ div .read-text {
     display: flex;
     flex-direction: column;
     /* align-content: center;    */
-    box-shadow: 1px 1px 2px 2px lightgrey;
+    a
 }
 
 #add-book-div p {

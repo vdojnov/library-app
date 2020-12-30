@@ -38,15 +38,14 @@ function getBookCoverURL(title, cb) {
     let theUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + title;
     xmlHttp.onload = function (e) {
         let objJson = JSON.parse(xmlHttp.responseText);
-        if (objJson.items) {
-            let thumbnail=objJson.items[0].volumeInfo.imageLinks.thumbnail
-            if (thumbnail){
-                cb(thumbnail);
-            } else {
-                let thumbnail = "https://lh3.googleusercontent.com/proxy/GURi9BpmMCFCNPQlxa_pbuwhb286-KxvtstO9fyczA-_QyM3vZD3gvq5mfQu2L0-L7hND8JpCyheAQu0qkUsckuxCJ_H1mZ4pZtPZWknyl9Qioi6lnfOHV6tXGvmp52IQV-iKSmluJQtoIk17PylRcAgeJ2Bemx1HJZRYOQbuPVGxgHjk0E";
+        
+        try {
+            let thumbnail=objJson.items[0].volumeInfo.imageLinks.thumbnail;
             cb(thumbnail);
-            }
-        } 
+        } catch (error) {
+            let thumbnail = "https://vignette.wikia.nocookie.net/halo-university/images/5/5e/Cover_Art_Unavailable.png/revision/latest?cb=20160508020626";
+            cb(thumbnail);
+        }        
     }
     xmlHttp.open( "GET", theUrl);
     xmlHttp.send();
@@ -153,8 +152,8 @@ let submitNewBookBtn = document.querySelector("#submit-new-book")
 // let bookThree = new Book("The Subtle Art of not giving a fuck", "Robert Kiyasaki", false, "Business")
 // addBookToLibrary(bookThree)
 
-// let bookTwo = new Book("Rich Dad Poor Dad", "Robert Kiyasaki", false, "Business")
-// addBookToLibrary(bookTwo)
+let bookTwo = new Book("Rich Dad Poor Dad", "Robert Kiyasaki", false, "Business")
+addBookToLibrary(bookTwo)
 
 // let bookFour = new Book("asdkfasldkj", "Ivo Andric", false, "Business")
 // addBookToLibrary(bookFour)
