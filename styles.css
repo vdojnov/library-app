@@ -10,7 +10,7 @@ body {
 /* Header and Nav Bar */
 
 header {
-    height: 60px;
+    height: fit-content;
     background-color: antiquewhite;
     display: flex;
     flex-direction: row;
