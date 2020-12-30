@@ -79,7 +79,8 @@ function buildBookDiv(bookObj) {
         // Create book cover img tag
         const imgBookCover = document.createElement('img')
         imgBookCover.className = "book-img"
-        imgBookCover.src = bookObj.thumbnail
+        imgBookCover.src = bookObj.thumbnail[4]==="s"? bookObj.thumbnail: bookObj.thumbnail.slice(0, 4) + "s" + bookObj.thumbnail.slice(4);
+        console.log(bookObj.thumbnail)
         book.appendChild(imgBookCover)
     
         // Create div for toggle read 
