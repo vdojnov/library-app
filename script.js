@@ -1,7 +1,9 @@
 // Functions and Variables
 let myLibrary = [];
-let bookDiv = document.querySelector('#books-div')
+let bookDiv = document.querySelector('#books-div');
 let allDeleteBtns = document.querySelectorAll(".delete-book-btn");
+let allStatusBtns = document.querySelectorAll(".read-btn");
+
 
 function Book(title, author, read, category, id) {
     this.title = title;
@@ -18,7 +20,7 @@ function Book(title, author, read, category, id) {
 function getBookCoverURL(title, cb) {
     let xmlHttp = new XMLHttpRequest();
     let theUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + title;
-    xmlHttp.onload = function (e) {
+    xmlHttp.onload = function (_e) {
         let objJson = JSON.parse(xmlHttp.responseText);        
         try {
             let thumbnail=objJson.items[0].volumeInfo.imageLinks.thumbnail;
@@ -75,6 +77,7 @@ function buildBookDiv(bookObj) {
             const readBtn = document.createElement('button')
             readBtn.className = "read-btn"
             readBtn.textContent = bookObj.read? "Mark as Unread":"Mark as Read";
+            readBtn.style.backgroundColor = bookObj.read? "rgb(28, 184, 65)":"orange";
             bookReadDiv.appendChild(readBtn)
     
         book.appendChild(bookReadDiv)
@@ -126,6 +129,11 @@ function updateCurrentButtons() {
         delBtn.addEventListener('click', deleteBook)
         // delBtn.addEventListener("mouseover", () => {console.log("mouse")})
     });
+
+    allStatusBtns = document.querySelectorAll(".read-btn");
+    allStatusBtns.forEach(btn => {
+        btn.addEventListener('click',  changeReadStatus)
+    });
 }
 
 function deleteBook() {
@@ -136,6 +144,32 @@ function deleteBook() {
         return book.id !== bookID
     })
     this.parentElement.classList.toggle('inactive')
+}
+
+let i;
+function changeReadStatus() {
+    let currBookBtn = this;
+    // console.log(this)
+    let bookID = this.parentElement.parentElement.dataset.id
+    myLibrary.find(function(book) {
+        if(book.id == bookID){
+            if (book.read){
+                book.read = false
+                currBookBtn.textContent = "Mark As Read"
+                currBookBtn.previousElementSibling.textContent = "Not Read"
+                currBookBtn.style.backgroundColor = 'orange'
+            } else {
+                book.read = true
+                currBookBtn.textContent = "Mark As Unread";
+                currBookBtn.previousElementSibling.textContent = "Read"
+                currBookBtn.style.backgroundColor = 'rgb(28, 184, 65)'
+            }
+            return true;
+        }   
+        
+    });
+    
+    
 }
 
 let addBookBtn = document.querySelector("#add-book-btn")
@@ -171,3 +205,5 @@ addBookBtn.addEventListener('click', handleAddBtn)
 
 // Notes:
 // Book API https://www.googleapis.com/books/v1/volumes?q=search+terms
+
+// Clear all Child elements of an element use: node.innerHTML = "";
