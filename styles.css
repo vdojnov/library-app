@@ -65,7 +65,7 @@ header {
     margin: 20px;
     background-color: aquamarine;
     border-radius: 0% 10% 10% 10%; 
-    box-shadow: 1px 1px 3px blue;     
+    box-shadow: 1px 1px 3px lightblue;     
 }
 
 .book p {

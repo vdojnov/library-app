@@ -13,26 +13,6 @@ function Book(title, author, read, category) {
     }    
 }
 
-const getThumbnail = function(title) {
-    const Http = new XMLHttpRequest();
-    const url='https://www.googleapis.com/books/v1/volumes?q=' + title;
-    Http.open("GET", url);
-    Http.send();
-    console.log(Http.responseText);
-    return Http.responseText;
-
-
-    // return Http.onreadystatechange = (e) => {
-        // console.log("here")
-        // console.log(Http.responseText)
-        // let objJson = JSON.parse(Http.responseText);
-        // console.log(objJson.items[0].volumeInfo.imageLinks.thumbnail)
-        // let thumbnail=objJson.items[0].volumeInfo.imageLinks.thumbnail
-        // console.log(thumbnail)
-        // return thumbnail
-    // }
-}
-
 function getBookCoverURL(title, cb) {
     let xmlHttp = new XMLHttpRequest();
     let theUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + title;
@@ -79,7 +59,6 @@ function buildBookDiv(bookObj) {
         const imgBookCover = document.createElement('img')
         imgBookCover.className = "book-img"
         imgBookCover.src = bookObj.thumbnail[4]==="s"? bookObj.thumbnail: bookObj.thumbnail.slice(0, 4) + "s" + bookObj.thumbnail.slice(4);
-        console.log(bookObj.thumbnail)
         book.appendChild(imgBookCover)
     
         // Create div for toggle read 
@@ -102,9 +81,8 @@ function buildBookDiv(bookObj) {
         const deleteBtn = document.createElement('button')
         deleteBtn.className = "delete-book-btn"
         deleteBtn.textContent = "Delete"
-        book.appendChild(deleteBtn)
-    
-        // bookDiv.appendFirstChild(book)
+        book.appendChild(deleteBtn)   
+  
         bookDiv.insertBefore(book, bookDiv.firstChild);
     })
 }
@@ -152,11 +130,9 @@ let submitNewBookBtn = document.querySelector("#submit-new-book")
 // let bookThree = new Book("The Subtle Art of not giving a fuck", "Robert Kiyasaki", false, "Business")
 // addBookToLibrary(bookThree)
 
-let bookTwo = new Book("Rich Dad Poor Dad", "Robert Kiyasaki", false, "Business")
-addBookToLibrary(bookTwo)
+// let bookTwo = new Book("Rich Dad Poor Dad", "Robert Kiyasaki", false, "Business")
+// addBookToLibrary(bookTwo)
 
-// let bookFour = new Book("asdkfasldkj", "Ivo Andric", false, "Business")
-// addBookToLibrary(bookFour)
 
 //asign the order to be shown
 let outputArr = myLibrary;
