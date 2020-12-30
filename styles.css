@@ -5,6 +5,7 @@ body {
     flex-direction: column;
     margin: 0px;
     height: 100vh;
+    font-family: Book Antiqua;
 }
 
 /* Header and Nav Bar */

@@ -54,7 +54,7 @@ function getBookCoverURL(title, cb) {
 
 
 function addBookToLibrary(bookObj) {
-    myLibrary.push(bookObj)
+    myLibrary.unshift(bookObj)
 }
 
 function buildBookDiv(bookObj) {
@@ -105,7 +105,8 @@ function buildBookDiv(bookObj) {
         deleteBtn.textContent = "Delete"
         book.appendChild(deleteBtn)
     
-        bookDiv.appendChild(book)
+        // bookDiv.appendFirstChild(book)
+        bookDiv.insertBefore(book, bookDiv.firstChild);
     })
 }
 
