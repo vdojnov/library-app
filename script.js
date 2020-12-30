@@ -1,6 +1,7 @@
 // Functions and Variables
 let myLibrary = [];
 let bookDiv = document.querySelector('#books-div')
+let allDeleteBtns = document.querySelectorAll(".delete-book-btn");
 
 function Book(title, author, read, category, id) {
     this.title = title;
@@ -42,6 +43,7 @@ function buildBookDiv(bookObj) {
         // create book div
         const book = document.createElement('div')
         book.className = "book" 
+        book.dataset.id = bookObj.id
     
         // Create Book title p tag
         const pBookTitle = document.createElement('p')
@@ -84,6 +86,7 @@ function buildBookDiv(bookObj) {
         book.appendChild(deleteBtn)   
   
         bookDiv.insertBefore(book, bookDiv.firstChild);
+        updateCurrentButtons()
     })
 }
 
@@ -117,6 +120,24 @@ function handleSubmitBtn() {
     handleAddBtn()
 }
 
+function updateCurrentButtons() {
+    allDeleteBtns = document.querySelectorAll(".delete-book-btn")
+    allDeleteBtns.forEach(delBtn => {
+        delBtn.addEventListener('click', deleteBook)
+        // delBtn.addEventListener("mouseover", () => {console.log("mouse")})
+    });
+}
+
+function deleteBook() {
+    // alert("here")
+    let bookID = this.parentElement.dataset.id;
+    console.log(bookID)
+    myLibrary = myLibrary.filter((book) => {
+        return book.id !== bookID
+    })
+    this.parentElement.classList.toggle('inactive')
+}
+
 let addBookBtn = document.querySelector("#add-book-btn")
 let submitNewBookBtn = document.querySelector("#submit-new-book")
 
@@ -130,6 +151,7 @@ let submitNewBookBtn = document.querySelector("#submit-new-book")
 // addBookToLibrary(bookTwo)
 
 
+
 //assign the order to be shown
 let outputArr = myLibrary;
 
@@ -137,7 +159,15 @@ outputArr.forEach(bookObj => buildBookDiv(bookObj));
 
 addBookBtn.addEventListener('click', handleAddBtn)
 
+// Array.from(allDeleteBtns)
 
+
+// allDeleteBtns.forEach(delBtn => {
+//     delBtn.addEventListener('click', deleteBook)
+//     // delBtn.addEventListener("mouseover", () => {console.log("mouse")})
+// });
+
+// console.log(allDeleteBtns)
 
 // Notes:
 // Book API https://www.googleapis.com/books/v1/volumes?q=search+terms
