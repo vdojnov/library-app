@@ -2,12 +2,13 @@
 let myLibrary = [];
 let bookDiv = document.querySelector('#books-div')
 
-function Book(title, author, read, category) {
+function Book(title, author, read, category, id) {
     this.title = title;
     this.author = author;
     this.read = read;
-    this.category = category
-    this.thumbnail = ""
+    this.category = category;
+    this.thumbnail = "";
+    this.id = id;
     this.info = function() {    
         return title + " by " + author+ ", " + pages +" pages, " + read?"finished reading.":"not yet read."; 
     }    
@@ -101,13 +102,15 @@ function handleSubmitBtn() {
     let readText = radioButton.value;
     let readBoolean = readText==="read";
     let category = document.querySelector("#book-category").value;
-
+    let id = (myLibrary.length === 0)? 0:myLibrary[0].id + 1;
+    
     let blank = "";
     if (title===blank | author===blank | category === blank | !radioButton) {
         return false
     }
 
-    let newBook = new Book(title, author, readBoolean, category)
+
+    let newBook = new Book(title, author, readBoolean, category, id)
     addBookToLibrary(newBook)
     buildBookDiv(newBook)
     inputBookForm.reset();
@@ -117,8 +120,8 @@ function handleSubmitBtn() {
 let addBookBtn = document.querySelector("#add-book-btn")
 let submitNewBookBtn = document.querySelector("#submit-new-book")
 
-let bookOne = new Book("The Lean Startup", "Eric Ries", false, "Business")
-addBookToLibrary(bookOne)
+// let bookOne = new Book("The Lean Startup", "Eric Ries", false, "Business")
+// addBookToLibrary(bookOne)
 
 // let bookThree = new Book("The Subtle Art of not giving a fuck", "Robert Kiyasaki", false, "Business")
 // addBookToLibrary(bookThree)
@@ -127,7 +130,7 @@ addBookToLibrary(bookOne)
 // addBookToLibrary(bookTwo)
 
 
-//asign the order to be shown
+//assign the order to be shown
 let outputArr = myLibrary;
 
 outputArr.forEach(bookObj => buildBookDiv(bookObj));
