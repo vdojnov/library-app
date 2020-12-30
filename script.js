@@ -17,8 +17,7 @@ function getBookCoverURL(title, cb) {
     let xmlHttp = new XMLHttpRequest();
     let theUrl = 'https://www.googleapis.com/books/v1/volumes?q=' + title;
     xmlHttp.onload = function (e) {
-        let objJson = JSON.parse(xmlHttp.responseText);
-        
+        let objJson = JSON.parse(xmlHttp.responseText);        
         try {
             let thumbnail=objJson.items[0].volumeInfo.imageLinks.thumbnail;
             cb(thumbnail);
@@ -115,17 +114,11 @@ function handleSubmitBtn() {
     handleAddBtn()
 }
 
-
 let addBookBtn = document.querySelector("#add-book-btn")
 let submitNewBookBtn = document.querySelector("#submit-new-book")
 
-
-
-
-
-
-// let bookOne = new Book("The Lean Startup", "Eric Ries", false, "Business")
-// addBookToLibrary(bookOne)
+let bookOne = new Book("The Lean Startup", "Eric Ries", false, "Business")
+addBookToLibrary(bookOne)
 
 // let bookThree = new Book("The Subtle Art of not giving a fuck", "Robert Kiyasaki", false, "Business")
 // addBookToLibrary(bookThree)
@@ -137,13 +130,10 @@ let submitNewBookBtn = document.querySelector("#submit-new-book")
 //asign the order to be shown
 let outputArr = myLibrary;
 
-
-
 outputArr.forEach(bookObj => buildBookDiv(bookObj));
 
 addBookBtn.addEventListener('click', handleAddBtn)
 
-// submitNewBookBtn.addEventListener('click', handleSubmitBtn)
 
 
 // Notes:
