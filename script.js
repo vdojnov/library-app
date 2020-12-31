@@ -5,12 +5,12 @@ let allDeleteBtns = document.querySelectorAll(".delete-book-btn");
 let allStatusBtns = document.querySelectorAll(".read-btn");
 
 
-function Book(title, author, read, category, id) {
+function Book(id, title, author, read, category, thumbnail) {
     this.title = title;
     this.author = author;
     this.read = read;
     this.category = category;
-    this.thumbnail = "";
+    this.thumbnail = thumbnail;
     this.id = id;
     this.info = function() {    
         return title + " by " + author+ ", " + pages +" pages, " + read?"finished reading.":"not yet read."; 
@@ -40,57 +40,54 @@ function addBookToLibrary(bookObj) {
 }
 
 function buildBookDiv(bookObj) {
-    getBookCoverURL(bookObj.title, (thumbnail) => {
-        bookObj.thumbnail = thumbnail;
-        // create book div
-        const book = document.createElement('div')
-        book.className = "book" 
-        book.dataset.id = bookObj.id
+    // create book div
+    const book = document.createElement('div')
+    book.className = "book" 
+    book.dataset.id = bookObj.id
+
+    // Create Book title p tag
+    const pBookTitle = document.createElement('p')
+    pBookTitle.className = "book-title"
+    pBookTitle.textContent = bookObj.title
+    book.appendChild(pBookTitle)
+
+    // Create Book author p tag
+    const pBookAuthor = document.createElement('p')
+    pBookAuthor.className = "book-author"
+    pBookAuthor.textContent = bookObj.author
+    book.appendChild(pBookAuthor)
+
+    // Create book cover img tag
+    const imgBookCover = document.createElement('img')
+    imgBookCover.className = "book-img"
+    imgBookCover.src = bookObj.thumbnail[4]==="s"? bookObj.thumbnail: bookObj.thumbnail.slice(0, 4) + "s" + bookObj.thumbnail.slice(4);
+    book.appendChild(imgBookCover)
+
+    // Create div for toggle read 
+    const bookReadDiv = document.createElement('div')
+    bookReadDiv.className = "book-read-div"
     
-        // Create Book title p tag
-        const pBookTitle = document.createElement('p')
-        pBookTitle.className = "book-title"
-        pBookTitle.textContent = bookObj.title
-        book.appendChild(pBookTitle)
-    
-        // Create Book author p tag
-        const pBookAuthor = document.createElement('p')
-        pBookAuthor.className = "book-author"
-        pBookAuthor.textContent = bookObj.author
-        book.appendChild(pBookAuthor)
-    
-        // Create book cover img tag
-        const imgBookCover = document.createElement('img')
-        imgBookCover.className = "book-img"
-        imgBookCover.src = bookObj.thumbnail[4]==="s"? bookObj.thumbnail: bookObj.thumbnail.slice(0, 4) + "s" + bookObj.thumbnail.slice(4);
-        book.appendChild(imgBookCover)
-    
-        // Create div for toggle read 
-        const bookReadDiv = document.createElement('div')
-        bookReadDiv.className = "book-read-div"
-        
-            const pReadText = document.createElement('p')
-            pReadText.className = "read-text"
-            pReadText.textContent = bookObj.read? "Read":"Not Read";
-            bookReadDiv.appendChild(pReadText)
-    
-            const readBtn = document.createElement('button')
-            readBtn.className = "read-btn"
-            readBtn.textContent = bookObj.read? "Mark as Unread":"Mark as Read";
-            readBtn.style.backgroundColor = bookObj.read? "rgb(28, 184, 65)":"orange";
-            bookReadDiv.appendChild(readBtn)
-    
-        book.appendChild(bookReadDiv)
-    
-        // Create delete button for book
-        const deleteBtn = document.createElement('button')
-        deleteBtn.className = "delete-book-btn"
-        deleteBtn.textContent = "Delete"
-        book.appendChild(deleteBtn)   
-  
-        bookDiv.insertBefore(book, bookDiv.firstChild);
-        updateCurrentButtons()
-    })
+        const pReadText = document.createElement('p')
+        pReadText.className = "read-text"
+        pReadText.textContent = bookObj.read? "Read":"Not Read";
+        bookReadDiv.appendChild(pReadText)
+
+        const readBtn = document.createElement('button')
+        readBtn.className = "read-btn"
+        readBtn.textContent = bookObj.read? "Mark as Unread":"Mark as Read";
+        readBtn.style.backgroundColor = bookObj.read? "rgb(28, 184, 65)":"orange";
+        bookReadDiv.appendChild(readBtn)
+
+    book.appendChild(bookReadDiv)
+
+    // Create delete button for book
+    const deleteBtn = document.createElement('button')
+    deleteBtn.className = "delete-book-btn"
+    deleteBtn.textContent = "Delete"
+    book.appendChild(deleteBtn)   
+
+    bookDiv.insertBefore(book, bookDiv.firstChild);
+    updateCurrentButtons()
 }
 
 function handleAddBtn() {   
@@ -115,19 +112,20 @@ function handleSubmitBtn() {
         return false
     }
 
-
-    let newBook = new Book(title, author, readBoolean, category, id)
-    addBookToLibrary(newBook)
-    buildBookDiv(newBook)
-    inputBookForm.reset();
-    handleAddBtn()
+    getBookCoverURL(title, (thumbnail) => {
+        let newBook = new Book(id, title, author, readBoolean, category, thumbnail)
+        writeBookData(id, title, author, readBoolean, category, thumbnail)
+        addBookToLibrary(newBook)
+        buildBookDiv(newBook)
+        inputBookForm.reset();
+        handleAddBtn()
+    })
 }
 
 function updateCurrentButtons() {
     allDeleteBtns = document.querySelectorAll(".delete-book-btn")
     allDeleteBtns.forEach(delBtn => {
         delBtn.addEventListener('click', deleteBook)
-        // delBtn.addEventListener("mouseover", () => {console.log("mouse")})
     });
 
     allStatusBtns = document.querySelectorAll(".read-btn");

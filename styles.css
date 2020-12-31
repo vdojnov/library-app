@@ -186,6 +186,7 @@ div .read-text {
     bottom: 115px;
     display: flex;
     flex-direction: column;
+    box-shadow: 1px 1px 3px lightblue;
     /* align-content: center;    */
 }
 

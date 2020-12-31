@@ -14,5 +14,16 @@ firebase.initializeApp(firebaseConfig);
   // Get a reference to the database service
 let db = firebase.database();
 
-let ii = firebase.database().ref().child('array')
-ii.on('value', snap => console.log(snap.val()))
+// let ii = firebase.database().ref().child('array')
+// ii.on('value', snap => console.log(snap.val()))
+
+function writeBookData(bookID, title, author, read, category, thumbnail) {
+  firebase.database().ref('books/' + bookID).set({
+    title: title,
+    author: author,
+    read: read,
+    category: category,
+    thumbnail: thumbnail,    
+  });
+}
+
