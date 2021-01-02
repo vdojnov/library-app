@@ -23,7 +23,51 @@ function writeBookData(bookID, title, author, read, category, thumbnail) {
     author: author,
     read: read,
     category: category,
-    thumbnail: thumbnail,    
+    thumbnail: thumbnail,
+    id: bookID
   });
 }
 
+var ref = firebase.database().ref();
+let ir;
+function populateMyLibrary() {
+  ref.on("value", function(snapshot) {
+    try {
+      myLibrary = [];
+      bookDiv.innerHTML = ""
+      for (let key in snapshot.val().books){
+        console.log(snapshot.val().books[key])
+        addBookToLibrary(snapshot.val().books[key])
+        buildBookDiv(snapshot.val().books[key])
+      }      
+    } catch (error) {
+      
+    }
+    // for (let j = 0; j<len; j++) {
+    //   console.log(snapshot.val().books[j])
+
+    //   addBookToLibrary(snapshot.val().books[j])
+    //   buildBookDiv(snapshot.val().books[j])
+    //   console.log(snapshot.val().books[j])
+    // }
+    // console.log(snapshot.val().books);
+  }, function (error) {
+    console.log("Error: " + error.code);
+  });
+}
+  
+// let obj = JSON.parse(ir.books)
+
+// console.log(ir)
+
+// console.log(
+//   firebase.database().ref('/books/').once('value').then((snapshot) => {
+//   var username = (snapshot.val()
+// })
+// )
+
+// var userId = firebase.auth().currentUser.uid;
+// return firebase.database().ref('/users/' + userId).once('value').then((snapshot) => {
+//   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+//   // ...
+// }); 

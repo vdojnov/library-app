@@ -1,5 +1,6 @@
 // Functions and Variables
 let myLibrary = [];
+populateMyLibrary()
 let bookDiv = document.querySelector('#books-div');
 let allDeleteBtns = document.querySelectorAll(".delete-book-btn");
 let allStatusBtns = document.querySelectorAll(".read-btn");
@@ -116,7 +117,7 @@ function handleSubmitBtn() {
         let newBook = new Book(id, title, author, readBoolean, category, thumbnail)
         writeBookData(id, title, author, readBoolean, category, thumbnail)
         addBookToLibrary(newBook)
-        buildBookDiv(newBook)
+        // buildBookDiv(newBook)
         inputBookForm.reset();
         handleAddBtn()
     })
@@ -142,6 +143,7 @@ function deleteBook() {
         return book.id !== bookID
     })
     this.parentElement.classList.toggle('inactive')
+    firebase.database().ref('books/' + bookID).remove()
 }
 
 let i;
@@ -156,11 +158,17 @@ function changeReadStatus() {
                 currBookBtn.textContent = "Mark As Read"
                 currBookBtn.previousElementSibling.textContent = "Not Read"
                 currBookBtn.style.backgroundColor = 'orange'
+                firebase.database().ref('books/' + book.id).update({
+                    read: false
+                  })
             } else {
                 book.read = true
                 currBookBtn.textContent = "Mark As Unread";
                 currBookBtn.previousElementSibling.textContent = "Read"
                 currBookBtn.style.backgroundColor = 'rgb(28, 184, 65)'
+                firebase.database().ref('books/' + book.id).update({
+                    read: true
+                  })
             }
             return true;
         }   
@@ -187,7 +195,9 @@ let submitNewBookBtn = document.querySelector("#submit-new-book")
 //assign the order to be shown
 let outputArr = myLibrary;
 
-outputArr.forEach(bookObj => buildBookDiv(bookObj));
+
+// THIS IS FOR WHEN I WANT TO BE ABLE TO SORT
+// outputArr.forEach(bookObj => buildBookDiv(bookObj));
 
 addBookBtn.addEventListener('click', handleAddBtn)
 
