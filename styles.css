@@ -35,6 +35,8 @@ header {
     width: fit-content;
     align-self: center;
     margin-right: 10px;
+    padding-bottom: 20px;
+    margin-top: 20px;
 }
 
 #right-nav{
@@ -180,9 +182,9 @@ div .read-text {
 .add-book-div {
     position: fixed;
     background-color: beige;
-    width: 320px;
+    width: 350px;
     height:350px;
-    right:30px;
+    right:12px;
     bottom: 115px;
     display: flex;
     flex-direction: column;

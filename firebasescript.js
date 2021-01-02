@@ -35,22 +35,17 @@ function populateMyLibrary() {
     try {
       myLibrary = [];
       bookDiv.innerHTML = ""
-      for (let key in snapshot.val().books){
-        console.log(snapshot.val().books[key])
-        addBookToLibrary(snapshot.val().books[key])
-        buildBookDiv(snapshot.val().books[key])
-      }      
-    } catch (error) {
-      
+      if (snapshot.val()!==null){
+        for (let key in snapshot.val().books){
+          // console.log(snapshot.val().books[key])
+          addBookToLibrary(snapshot.val().books[key])
+          buildBookDiv(snapshot.val().books[key])
+        }      
+      }
+      } catch (error) {
+      console.log(`Error caught when retieving data from firebase: ${error}`)
     }
-    // for (let j = 0; j<len; j++) {
-    //   console.log(snapshot.val().books[j])
-
-    //   addBookToLibrary(snapshot.val().books[j])
-    //   buildBookDiv(snapshot.val().books[j])
-    //   console.log(snapshot.val().books[j])
-    // }
-    // console.log(snapshot.val().books);
+    
   }, function (error) {
     console.log("Error: " + error.code);
   });
