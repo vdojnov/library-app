@@ -1,6 +1,11 @@
 # library-app
- This app is part of The Odin Project Full Stack Javascript Curriculum \
+ This app is part of The Odin Project Full Stack Javascript Curriculum.
+
+Click the link to see a live preview [here](https://vdojnov.github.io/library-app/).
+
+ **Description**: The App is meant for users to save book into their virtual library and mark them as 'read' or 'not read'. Once a user enters a name of a book, an API call is made to Google books API to get and display the thumbnail picture. The app was built using Javascript, HTML and CSS. A Single Sign on Method was implemented throgh Google's FireBase and the user data is save in a NoSQL databse using Firebase Realtime database.
  
+
  
  # Instructions
  
