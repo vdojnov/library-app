@@ -206,6 +206,7 @@ div .read-text {
     align-content: center;
     padding-left: 15px;
     padding-right: 15px;
+    font-size: 16px;
 }
 
 #new-book-form input {
