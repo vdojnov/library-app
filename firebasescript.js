@@ -14,11 +14,21 @@ firebase.initializeApp(firebaseConfig);
   // Get a reference to the database service
 let db = firebase.database();
 
-// let ii = firebase.database().ref().child('array')
-// ii.on('value', snap => console.log(snap.val()))
+var provider = new firebase.auth.GoogleAuthProvider();
+const auth = firebase.auth();
+
+let currentUser = firebase.auth().currentUser;
+
+auth.onAuthStateChanged(user =>{
+    console.log(user);
+    currentUser = user;
+})
+
+
 
 function writeBookData(bookID, title, author, read, category, thumbnail) {
-  firebase.database().ref('books/' + bookID).set({
+  let userID = auth.currentUser.uid;
+  firebase.database().ref('users/' + userID + '/books/' + bookID).set({
     title: title,
     author: author,
     read: read,
@@ -31,15 +41,27 @@ function writeBookData(bookID, title, author, read, category, thumbnail) {
 var ref = firebase.database().ref();
 let ir;
 function populateMyLibrary() {
+  // let userID = auth.currentUser.uid;
   ref.on("value", function(snapshot) {
     try {
       myLibrary = [];
       bookDiv.innerHTML = ""
+      // console.log(snapshot.val().users[auth.currentUser.uid]['books'][0])
+      // if (snapshot.val()!==null){
+      //   for (let key in snapshot.val().books){
+      //     // console.log(snapshot.val().users)
+      //     addBookToLibrary(snapshot.val().books[key])
+      //     buildBookDiv(snapshot.val().books[key])
+      //   }      
+      // }
+      console.log(snapshot.val()!==null)
       if (snapshot.val()!==null){
-        for (let key in snapshot.val().books){
-          // console.log(snapshot.val().books[key])
-          addBookToLibrary(snapshot.val().books[key])
-          buildBookDiv(snapshot.val().books[key])
+        for (let key in snapshot.val().users[auth.currentUser.uid]['books']){
+          // console.log(snapshot.val().users)
+    console.log("heree")
+
+          addBookToLibrary(snapshot.val().users[auth.currentUser.uid]['books'][key])
+          buildBookDiv(snapshot.val().users[auth.currentUser.uid]['books'][key])
         }      
       }
       } catch (error) {
@@ -47,22 +69,53 @@ function populateMyLibrary() {
     }
     
   }, function (error) {
-    console.log("Error: " + error.code);
+    // console.log("Error: " + error.code);
+  });
+} 
+
+function signIn() {
+  // firebase.auth().signInWithRedirect(provider);
+  // var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  // ui.start('#firebaseui-auth-container', {
+  //   signInOptions: [
+  //     // List of OAuth providers supported.
+  //     firebase.auth.GoogleAuthProvider.PROVIDER_ID
+  //   ],
+  //   signInSuccessUrl: 'http://localhost:5500/index.html',
+  //   // Other config options...
+  // });
+
+  firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+    populateMyLibrary()
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
   });
 }
   
-// let obj = JSON.parse(ir.books)
 
-// console.log(ir)
+function signOut() {
+  firebase.auth().signOut().then(() => {
+    // Sign-out successful.
+    bookDiv.innerHTML = ""
+  }).catch((error) => {
+    // An error happened.
+  });
+}
 
-// console.log(
-//   firebase.database().ref('/books/').once('value').then((snapshot) => {
-//   var username = (snapshot.val()
-// })
-// )
-
-// var userId = firebase.auth().currentUser.uid;
-// return firebase.database().ref('/users/' + userId).once('value').then((snapshot) => {
-//   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-//   // ...
-// }); 
