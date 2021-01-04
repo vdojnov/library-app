@@ -6,6 +6,7 @@ body {
     margin: 0px;
     height: 100vh;
     font-family: Book Antiqua;
+    background-color: #def2f1;
 }
 
 /* Header and Nav Bar */
@@ -19,7 +20,7 @@ header {
 }
 
 #header-div {
-    background-color: antiquewhite;
+    background-color: #3AAFA9;
 
 }
 
@@ -79,9 +80,10 @@ header {
     width: 300px;
     height:fit-content;
     margin: 20px;
-    background-color: aquamarine;
+    margin-bottom: 30px;
+    background-color: #3AAFA9;
     border-radius: 0% 10% 10% 10%; 
-    box-shadow: 1px 1px 3px lightblue;     
+    box-shadow: 1px 1px 3px rgb(242, 247, 248);     
 }
 
 .book p {
@@ -128,11 +130,13 @@ header {
     border-radius: 4px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     background: rgb(28, 184, 65);
+    box-shadow: 1px 1px 2px #17252a;
 }
 
 .read-btn:active {
     outline: none;
     border: none;
+    box-shadow: none;
 }
   
 .read-btn:focus {
@@ -158,11 +162,13 @@ div .read-text {
     border-radius: 4px;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     background: rgb(202, 60, 60);
+    box-shadow: 1px 1px 2px #17252a;
 }
 
 .delete-book-btn:active {
     outline: none;
     border: none;
+    box-shadow: none;
 }
   
 .delete-book-btn:focus {
@@ -188,10 +194,13 @@ div .read-text {
     font-size: 2em;
     font-weight: bold;
     border-radius: 50%;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #2b7a78;
+    color: #Feffff;
     text-align: center;
     cursor: pointer;
+    outline: none;
+    padding: 0;
+
 }
 
 #add-book-btn:active {
@@ -259,7 +268,17 @@ input[type=radio] {
 
 #footer-p {
     text-align: center;
-    position: static;
-    bottom: 0;
-
+    /* vertical-align: bottom; */
+    margin-bottom: 2px;
+    margin-top: 2px;
+    width: 100%;
+    
 } 
+
+#footer-div {
+    position: fixed;
+    bottom: 0;
+    background-color: aquamarine;
+    height: fit-content;
+    width: 100%;
+}
