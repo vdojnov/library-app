@@ -23,6 +23,7 @@ header {
     display: flex;
     flex-direction: row;
     border-right: dotted black 0.5px;
+    height: 60px;
 }
 
 #logo-icon {
@@ -49,6 +50,7 @@ header {
     margin-right: 15px;
     padding-left: 15px;
     border-left: dotted black 0.5px;
+    height: 60px;
 }
 
 
