@@ -1,6 +1,6 @@
 // Functions and Variables
 let myLibrary = [];
-// populateMyLibrary()
+populateMyLibrary()
 let bookDiv = document.querySelector('#books-div');
 let allDeleteBtns = document.querySelectorAll(".delete-book-btn");
 let allStatusBtns = document.querySelectorAll(".read-btn");

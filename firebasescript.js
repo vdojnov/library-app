@@ -19,10 +19,40 @@ const auth = firebase.auth();
 
 let currentUser = firebase.auth().currentUser;
 
-auth.onAuthStateChanged(user =>{
-    console.log(user);
-    currentUser = user;
-})
+// auth.onAuthStateChanged(user =>{
+//   // console.log("hereeerrr")
+//     let logInOutBtn = document.querySelector('#right-nav a')
+//     if (user) {
+//       logInOutBtn.onClick = signOut()
+//       logInOutBtn.textContent = "LogOut"
+//       // alert("hello")
+//     } else {
+//       logInOutBtn.onClick = signIn()
+//       logInOutBtn.textContent = "LogIn"
+//       // alert("no user")
+//     }
+// })
+let logInOutBtn = document.querySelector('#right-nav a')
+
+firebase.auth().onAuthStateChanged(function(user) {
+  console.log("second")
+  let welcomeDiv = document.querySelector('#welcome-div p')
+  if (user) {
+    // User is signed in.
+    welcomeDiv.textContent =  "Welcome to " + user.displayName + "'s Library"
+    logInOutBtn.onclick = signOut
+    logInOutBtn.textContent = "LogOut"
+    console.log("user")
+
+  } else {
+    // No user is signed in.
+    welcomeDiv.textContent = "You are not signed in, if you would like to save your books, you must sign in! You can test out the functionality below without Logging in."
+    logInOutBtn.onclick = signIn
+    logInOutBtn.textContent = "LogIn"
+    console.log("no user")
+
+  }
+});
 
 
 
@@ -85,28 +115,64 @@ function signIn() {
   //   // Other config options...
   // });
 
-  firebase.auth()
-  .signInWithPopup(provider)
-  .then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-    var credential = result.credential;
 
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+  .then(() => {
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
     // ...
-    populateMyLibrary()
-  }).catch((error) => {
+    // New sign-in will be persisted with session persistence.
+    return firebase.auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      /** @type {firebase.auth.OAuthCredential} */
+      var credential = result.credential;
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+      populateMyLibrary()
+    }).catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+  })
+  .catch((error) => {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
   });
+
+
+  // firebase.auth()
+  // .signInWithPopup(provider)
+  // .then((result) => {
+  //   /** @type {firebase.auth.OAuthCredential} */
+  //   var credential = result.credential;
+  //   // This gives you a Google Access Token. You can use it to access the Google API.
+  //   var token = credential.accessToken;
+  //   // The signed-in user info.
+  //   var user = result.user;
+  //   // ...
+  //   populateMyLibrary()
+  // }).catch((error) => {
+  //   // Handle Errors here.
+  //   var errorCode = error.code;
+  //   var errorMessage = error.message;
+  //   // The email of the user's account used.
+  //   var email = error.email;
+  //   // The firebase.auth.AuthCredential type that was used.
+  //   var credential = error.credential;
+  //   // ...
+  // });
 }
   
 
