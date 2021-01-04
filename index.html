@@ -9,15 +9,17 @@
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div id="left-nav">
-            <img id="logo-icon" src="pictures/storytelling.png">
-            <p>Library App</p>
-        </div>
-        <div id="right-nav">
-            <a href="#" onClick="signIn()">Login</a>
-        </div>
-    </header>
+    <div id="header-div">
+        <header>
+            <div id="left-nav">
+                <img id="logo-icon" src="pictures/storytelling.png">
+                <p>Library App</p>
+            </div>
+            <div id="right-nav">
+                <a href="#" onClick="signIn()">Login</a>
+            </div>
+        </header>
+    </div>
     <div id="welcome-div">
         <p></p>
     </div>
@@ -79,7 +81,7 @@
      <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
      <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
      <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
-     <div id="firebaseui-auth-container"></div>
+     <!-- <div id="firebaseui-auth-container"></div> -->
      <script src="firebasescript.js"></script>
 </body>
 </html>
