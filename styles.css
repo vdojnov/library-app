@@ -11,12 +11,13 @@ body {
 /* Header and Nav Bar */
 
 header {
-    height: fit-content;
+    /* height: fit-content; */
     background-color: antiquewhite;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     height: 60px;
+    border-bottom: dotted black 2px;
 }
 
 #left-nav {
