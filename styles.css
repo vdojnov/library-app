@@ -216,14 +216,14 @@ div .read-text {
 
 .add-book-div {
     position: fixed;
-    background-color: beige;
+    background-color: #feffff;
     width: 350px;
     height:350px;
     right:12px;
     bottom: 115px;
     display: flex;
     flex-direction: column;
-    box-shadow: 1px 1px 3px lightblue;
+    box-shadow: 2px 2px 3px #17252a;
     /* align-content: center;    */
 }
 
@@ -280,8 +280,9 @@ input[type=radio] {
 #footer-div {
     position: fixed;
     bottom: 0;
-    background-color: aquamarine;
+    background-color: #Feffff;
     height: fit-content;
     width: 100%;
+    color: #17252a;
 }
 
