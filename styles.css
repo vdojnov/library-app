@@ -175,8 +175,18 @@ div .read-text {
     border-radius: 50%;
     bottom: 0;
     right: 0;
-    background-color: royalblue;
-    font-size: 35px;
+    
+    
+    /* height: 80px; */
+    line-height: 70px;  
+    /* width: 80px;   */
+    font-size: 2em;
+    font-weight: bold;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    cursor: pointer;
 }
 
 #add-book-btn:active {
@@ -240,4 +250,18 @@ input[type=radio] {
 
 .inactive {
     display: none;
+}
+
+
+.add-book-btn-div {
+    height: 80px;
+    line-height: 80px;  
+    width: 80px;  
+    font-size: 2em;
+    font-weight: bold;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    cursor: pointer;
 }
