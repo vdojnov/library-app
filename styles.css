@@ -71,6 +71,7 @@ header {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: 30px;
 }
 
 .book {
@@ -282,3 +283,4 @@ input[type=radio] {
     height: fit-content;
     width: 100%;
 }
+
