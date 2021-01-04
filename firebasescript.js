@@ -35,21 +35,18 @@ let currentUser = firebase.auth().currentUser;
 let logInOutBtn = document.querySelector('#right-nav a')
 
 firebase.auth().onAuthStateChanged(function(user) {
-  console.log("second")
   let welcomeDiv = document.querySelector('#welcome-div p')
   if (user) {
     // User is signed in.
     welcomeDiv.textContent =  "Welcome to " + user.displayName + "'s Library"
     logInOutBtn.onclick = signOut
     logInOutBtn.textContent = "LogOut"
-    console.log("user")
 
   } else {
     // No user is signed in.
-    welcomeDiv.textContent = "You are not signed in, if you would like to save your books, you must sign in! You can test out the functionality below without Logging in."
+    welcomeDiv.textContent = "You are not signed in. To try the app press the '+' buttoon below or Login to save your books."
     logInOutBtn.onclick = signIn
     logInOutBtn.textContent = "LogIn"
-    console.log("no user")
 
   }
 });
@@ -84,12 +81,8 @@ function populateMyLibrary() {
       //     buildBookDiv(snapshot.val().books[key])
       //   }      
       // }
-      console.log(snapshot.val()!==null)
       if (snapshot.val()!==null){
         for (let key in snapshot.val().users[auth.currentUser.uid]['books']){
-          // console.log(snapshot.val().users)
-    console.log("heree")
-
           addBookToLibrary(snapshot.val().users[auth.currentUser.uid]['books'][key])
           buildBookDiv(snapshot.val().users[auth.currentUser.uid]['books'][key])
         }      
@@ -99,7 +92,7 @@ function populateMyLibrary() {
     }
     
   }, function (error) {
-    // console.log("Error: " + error.code);
+    console.log("Error: " + error.code + ", data cannot be saved without login.");
   });
 } 
 

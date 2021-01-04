@@ -57,6 +57,11 @@ header {
     height: 60px;
 }
 
+#welcome-div {
+    font-size: 1.5em;
+    text-align: center;
+}
+
 
 /* Book DIV and everything inside */
 
@@ -252,16 +257,9 @@ input[type=radio] {
     display: none;
 }
 
-
-.add-book-btn-div {
-    height: 80px;
-    line-height: 80px;  
-    width: 80px;  
-    font-size: 2em;
-    font-weight: bold;
-    border-radius: 50%;
-    background-color: #4CAF50;
-    color: white;
+#footer-p {
     text-align: center;
-    cursor: pointer;
-}
+    position: static;
+    bottom: 0;
+
+} 

@@ -145,7 +145,6 @@ function updateCurrentButtons() {
 function deleteBook() {
     // alert("here")
     let bookID = this.parentElement.dataset.id;
-    console.log(bookID)
     myLibrary = myLibrary.filter((book) => {
         return book.id !== bookID
     })
@@ -158,7 +157,6 @@ function deleteBook() {
 let i;
 function changeReadStatus() {
     let currBookBtn = this;
-    console.log(auth.currentUser.uid)
     let bookID = this.parentElement.parentElement.dataset.id
     myLibrary.find(function(book) {
         if(book.id == bookID){
