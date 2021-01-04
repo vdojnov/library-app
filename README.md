@@ -1,13 +1,14 @@
-# library-app
- This app is part of The Odin Project Full Stack Javascript Curriculum.
+# Library App
 
 Click the link to see a live preview [here](https://vdojnov.github.io/library-app/).
 
  **Description**: The App is meant for users to save books into their virtual library and mark them as 'read' or 'not read'. Once a user enters a name of a book, an API call is made to 'Google Books API' to get and display the thumbnail picture and is displayed for the user. The app was built using Javascript, HTML and CSS. A Single Sign On Method was implemented throgh Google's FireBase and the user data is save in a NoSQL database using Firebase's Realtime Database.
  
+ This app is part of The Odin Project Full Stack Javascript Curriculum.
 
  
  # Instructions
+ **Instructions taken from theodinproject.com**
  
 1. If you haven't already, set up your project with skeleton HTML/CSS and JS files.
 2. All of your book objects are going to be stored in a simple array, so add a function to the script (not the constructor) that can take user's input and store the new book objects into an array. Your code should look something like this:
