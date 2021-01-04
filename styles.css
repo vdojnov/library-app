@@ -16,7 +16,6 @@ header {
     flex-direction: row;
     justify-content: space-between;
     height: 60px;
-    border-bottom: dotted black 2px;
 }
 
 #header-div {
