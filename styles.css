@@ -4,7 +4,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0px;
-    height: 100vh;
+    height: fit-content;
     font-family: Book Antiqua;
     background-color: #def2f1;
     padding-bottom: 30px;
@@ -72,8 +72,7 @@ header {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    padding-bottom: 30px;
-    margin-bottom: 30px;
+
 }
 
 .book {
