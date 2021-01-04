@@ -44,10 +44,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 
   } else {
     // No user is signed in.
-    welcomeDiv.textContent = "You are not signed in. To try the app press the '+' buttoon below or Login to save your books."
+    welcomeDiv.textContent = "You are not signed in. To try the app, press the '+' button below or Login first to save your books."
     logInOutBtn.onclick = signIn
     logInOutBtn.textContent = "LogIn"
-
   }
 });
 
