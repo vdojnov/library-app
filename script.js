@@ -5,18 +5,33 @@ let bookDiv = document.querySelector('#books-div');
 let allDeleteBtns = document.querySelectorAll(".delete-book-btn");
 let allStatusBtns = document.querySelectorAll(".read-btn");
 
-
-function Book(id, title, author, read, category, thumbnail) {
-    this.title = title;
-    this.author = author;
-    this.read = read;
-    this.category = category;
-    this.thumbnail = thumbnail;
-    this.id = id;
-    this.info = function() {    
-        return title + " by " + author+ ", " + pages +" pages, " + read?"finished reading.":"not yet read."; 
-    }    
+// Convers function below into a class
+class Book {
+    constructor(id, title, author, read, category, thumbnail){
+        this.title = title;
+        this.author = author;
+        this.read = read;
+        this.category = category;
+        this.thumbnail = thumbnail;
+        this.id = id;
+    }
+    info() {    
+            return title + " by " + author+ ", " + pages +" pages, " + read?"finished reading.":"not yet read."; 
+        }    
 }
+
+// Original Function
+// function Book(id, title, author, read, category, thumbnail) {
+//     this.title = title;
+//     this.author = author;
+//     this.read = read;
+//     this.category = category;
+//     this.thumbnail = thumbnail;
+//     this.id = id;
+//     this.info = function() {    
+//         return title + " by " + author+ ", " + pages +" pages, " + read?"finished reading.":"not yet read."; 
+//     }    
+// }
 
 function getBookCoverURL(title, cb) {
     let xmlHttp = new XMLHttpRequest();
